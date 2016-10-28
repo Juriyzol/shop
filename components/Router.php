@@ -5,26 +5,19 @@ class Router
 {
 	private $routes;
 
-	public function __construct() {
+	public function __construct() 
+	{
 	
 	}
 	
-	public function run() {
-	
+	public function run() // метод вполне можно сделать static и все будет работать
+	{
 		echo 'Class router, method run'; // сообщение для проверки работоспособности
 		echo '<br><br>';
-		print(ROOT);
-	
+		print(ROOT); // смотрим что содержиться в константе 
 	}
-
 }
 
-
-
 /*
-		В приватном свойстве $routes у нас будут хранится маршруты
-		
 		метод run() принимает управление от фронтконтроллера
-
 */
-
