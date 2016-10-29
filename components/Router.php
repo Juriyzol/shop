@@ -4,19 +4,16 @@
 class Router 
 {
 	private $routes;
-
-	public function __construct() 
-	{
-		$routesPath = ROOT . '/config/routes.php';
-		$this->routes = include($routesPath);
-	}
 	
 	public function run()
 	{
+		include_once(ROOT . '/config/routes.php');
+		$this->routes = $routesPath;	
+	
 		echo '<pre>';
 		print_r ($this->routes); // Проверяем наличие массива роутов в приватном свойстве $routes
 		echo '</pre>';
-		echo '<br><br>' . 'тестируем ветвление'; 
+		echo '<br><br>' . 'тестируем ветвление, commit2'; 
 	}	
 }
 
@@ -28,7 +25,7 @@ class Router
 	
 	При помощи метода __construct() мы записываем массив наших роутов
 	в свойство $routes;
-	* Выражение include включает и выполняет указанный файл, то есть
+	* Выражение include подключает и выполняет указанный файл, то есть
 	в нашем случае возвращает массив значений:
 	return array (
 		'news' => 'news/index',

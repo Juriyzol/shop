@@ -1,6 +1,6 @@
 <?php
 
-return array (
+$routesPath = array (
 	'news' => 'news/index',
 	'products' => 'product/list',
 );
