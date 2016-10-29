@@ -3,17 +3,17 @@
 
 class Router 
 {
-	private $routes;
+	static private $routes;
 	
-	public function run()
+	static function run()
 	{
 		include_once(ROOT . '/config/routes.php');
-		$this->routes = $routesPath;	
+		$routes = $routesPath;	
 	
 		echo '<pre>';
-		print_r ($this->routes); // Проверяем наличие массива роутов в приватном свойстве $routes
+		print_r ($routes); // Проверяем наличие массива роутов в приватном свойстве $routes
 		echo '</pre>';
-		echo '<br><br>' . 'тестируем ветвление, commit2'; 
+		echo '<br><br>' . 'тестируем ветвление, commit4'; 
 	}	
 }
 
