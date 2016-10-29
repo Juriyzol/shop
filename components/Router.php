@@ -13,8 +13,10 @@ class Router
 	
 	public function run()
 	{
+		echo '<pre>';
 		print_r ($this->routes); // Проверяем наличие массива роутов в приватном свойстве $routes
-	}
+		echo '</pre>';
+	}	
 }
 
 /*
