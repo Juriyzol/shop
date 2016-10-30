@@ -11,12 +11,17 @@ class Router
 		$this->routes = include($routesPath);
 	}
 	
+	// Получаем строку запроса
+	private function getUri()
+	{
+		if(!empty($_SERVER['REQUEST_URI'])){
+			return trim($_SERVER['REQUEST_URI']);
+		}
+	}
+	
 	public function run()
 	{
-		// Получаем строку запроса
-		if(!empty($_SERVER['REQUEST_URI'])) {
-			$uri = trim($_SERVER['REQUEST_URI'], '/');
-		}
+		$uri = $this->getURI();
 		echo $uri;
 		
 		// Проверяем наличие такого запроса в routes.php
