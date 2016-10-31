@@ -3,6 +3,7 @@
 return array (
 	'news' => 'news/index',
 	'products' => 'product/list',
+	'products/123' => 'product/list',
 );
 
 /*
@@ -15,6 +16,4 @@ return array (
 При помощи наших роутов мы увидим, что запросу news, соответствует строка 
 news/index, которая означает что будет вызван метод actionIndex в контроллере
 NewsController
-
-
 */
