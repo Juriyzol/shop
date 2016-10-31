@@ -22,9 +22,12 @@ class Router
 	public function run()
 	{
 		$uri = $this->getURI();
-		echo $uri;
+		echo $uri . "<br><br>";
 		
 		// Проверяем наличие такого запроса в routes.php
+		foreach ($this->routes as $uriPattern => $path) {
+			echo "<pre>" . "$uriPattern => $path" . "</pre>";
+		}
 		
 		// Подключаем фаил с необходимым классом и контроллером 
 		//(определяем какой контроллер и экшен будут обрабатывать данный запрос)
