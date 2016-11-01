@@ -11,7 +11,6 @@ class Router
 		$this->routes = include($routesPath);
 	}
 	
-	// Получаем строку запроса
 	private function getUri()
 	{
 		if(!empty($_SERVER['REQUEST_URI'])){
@@ -23,41 +22,51 @@ class Router
 	{
 		$uri = $this->getURI();
 		
-		foreach ($this->routes as $uriPattern => $path) // 1
+		foreach ($this->routes as $uriPattern => $path)
 		{			
-			if (preg_match("~$uriPattern~", $uri)) // 2
+			if (preg_match("~$uriPattern~", $uri))
 			{ 
-				echo $path;	
+				$segments = explode('/', $path);
 				
-				$segments = explode('/', $path); // 2.1
-				
-				echo "<pre>";
-				print_r($segments);
-				echo "</pre>";
-				
-				// 2.2
 				$controllerName = ucfirst(array_shift($segments)).'Controller'; 
 				$actionName = 'action'.ucfirst((array_shift($segments)));
 
-				// 3)
-				echo "Класс: " . $controllerName . "<br>" . "Метод: " . $actionName;		
+				// 1
+				$controllerFail = ROOT . '/controllers/' . $controllerName . '.php';
+				if (file_exists($controllerFail))
+				{
+					include_once($controllerFail);
+				}
 				
+				// 2
+				$controllerObject = new $controllerName();
+				$result = $controllerObject->$actionName();
+				
+				// 3
+				if ($result != null) {
+					break;
+				}				
 			}			
 		}		
 	}	
 }
 
 /*
-	1) В переменной $uriPattern храняться имена из routes.php (news, products), 
-а в переменной $path хранятся значения из routes.php (news/index, product/list),
-которые соответствуют именам контроллеров и экшенов(методов)	
-	2) если имя из routes.php соответствует запросу мы делаем следующие шаги:
-	2.1) используя функцию explode(), мы делим строки из $path на две части
-	2.2) Далее мы получаем имя контроллера и экшена:
-array_shift вытаскивает первое слово из массива (news или product) и мы добавляем 
-к нему слово Controller, получается newsController или productController 
-Функция ucfirst() делает первую букву большой	
-	
-	3) На этом этапе мы можем видеть, что тот или иной запрос обрабатывает соответствующий
-класс и метод.	
+	1) Подключаем фаил с необходимым классом и контроллером 
+
+	2) Создаем объект класса контроллер, где вместо имени класса, мы подставляем
+переменную ($controllerName) которая содержит строку с именем этого класса.
+	В переменную $result мы вызываем метод инициализированного класса, где вместо имени
+метода мы подставляем переменную, которая содержит строку с названием нужного метода
+$actionName.
+
+	3) В методах наших контроллеров мы использовали выражение return true; Следовательно если 
+метод будет вызван, то при помощи выражения if ($result != null) мы можем об этом узнать
+и прервать при помощи break цикл foreach().
 */
+
+
+
+
+
+
