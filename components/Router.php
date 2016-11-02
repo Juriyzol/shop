@@ -26,43 +26,50 @@ class Router
 		{			
 			if (preg_match("~$uriPattern~", $uri))
 			{ 
+						
+				echo "<br>Где ищем (запрос, который набрал пользователь): " . $uri;
+				echo "<br>Что ищем (совпадение из правила): " . $uriPattern;
+				echo "<br>Кто обрабатывает: " . $path; 
+
+				$internalRoute = preg_replace("~$uriPattern~", $path, $uri);
+				/*	Функция preg_replace(), в строке запроса $uri (к примеру там содержиться 
+				такая строка - news/sport/12345) ищет параметры sport и 12345 по определенному 
+				шаблону содержащемуся в "~$uriPattern~" и указанному в routes.php ([a-z]+)/([0-9]+)
+				Если параметры в запросе соответствуют шаблону	
+				*/	
+				
+				echo '<br> Нужно сформировать: ' . $internalRoute;
+				
+			
+			
+			
+				/*
 				$segments = explode('/', $path);
 				
 				$controllerName = ucfirst(array_shift($segments)).'Controller'; 
 				$actionName = 'action'.ucfirst((array_shift($segments)));
 
-				// 1
 				$controllerFail = ROOT . '/controllers/' . $controllerName . '.php';
 				if (file_exists($controllerFail))
 				{
 					include_once($controllerFail);
 				}
 				
-				// 2
 				$controllerObject = new $controllerName();
 				$result = $controllerObject->$actionName();
 				
-				// 3
 				if ($result != null) {
 					break;
-				}				
+				}
+				*/
+				
 			}			
 		}		
 	}	
 }
 
 /*
-	1) Подключаем фаил с необходимым классом и контроллером 
 
-	2) Создаем объект класса контроллер, где вместо имени класса, мы подставляем
-переменную ($controllerName) которая содержит строку с именем этого класса.
-	В переменную $result мы вызываем метод инициализированного класса, где вместо имени
-метода мы подставляем переменную, которая содержит строку с названием нужного метода
-$actionName.
-
-	3) В методах наших контроллеров мы использовали выражение return true; Следовательно если 
-метод будет вызван, то при помощи выражения if ($result != null) мы можем об этом узнать
-и прервать при помощи break цикл foreach().
 */
 
 
