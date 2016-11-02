@@ -26,29 +26,32 @@ class Router
 		{			
 			if (preg_match("~$uriPattern~", $uri))
 			{ 
-						
-				echo "<br>Где ищем (запрос, который набрал пользователь): " . $uri;
-				echo "<br>Что ищем (совпадение из правила): " . $uriPattern;
-				echo "<br>Кто обрабатывает: " . $path; 
-
 				$internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-				/*	Функция preg_replace(), в строке запроса $uri (к примеру там содержиться 
-				такая строка - news/sport/12345) ищет параметры sport и 12345 по определенному 
-				шаблону содержащемуся в "~$uriPattern~" и указанному в routes.php ([a-z]+)/([0-9]+)
-				Если параметры в запросе соответствуют шаблону	
-				*/	
 				
-				echo '<br> Нужно сформировать: ' . $internalRoute;
+				echo 'Переменная $internalRoute до explode(): <br>';
+				echo '<pre>';
+				print_r($internalRoute);
+				echo '</pre> <br>';
 				
-			
-			
-			
-				/*
-				$segments = explode('/', $path);
+				$segments = explode('/', $internalRoute);
+				
+				echo 'Переменная $segments до array_shift(): <br>';
+				echo '<pre>';
+				print_r($segments);
+				echo '</pre> <br>';
 				
 				$controllerName = ucfirst(array_shift($segments)).'Controller'; 
 				$actionName = 'action'.ucfirst((array_shift($segments)));
-
+				
+				echo '<br> Имя контроллера: ' . $controllerName;				
+				echo '<br> Имя метода: ' . $actionName;
+				
+				$parameters = $segments;
+				echo '<pre>';
+					print_r ($parameters);
+				echo '</pre>';
+				
+				/*
 				$controllerFail = ROOT . '/controllers/' . $controllerName . '.php';
 				if (file_exists($controllerFail))
 				{
@@ -62,6 +65,7 @@ class Router
 					break;
 				}
 				*/
+				
 				
 			}			
 		}		
