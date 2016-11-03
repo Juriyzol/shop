@@ -42,8 +42,19 @@ class Router
 				}
 				
 				$controllerObject = new $controllerName();
-				$result = $controllerObject->$actionName($parameters);
-				// Передаем параметры в инициализированный метод
+				$result = call_user_func_array(array($controllerObject, $actionName), $parameters);
+				/*				
+				Эта функция вызывает метод чье название содержиться в переменной 
+				$actionName у объекта чье название содержиться в $controllerObject
+				и передает вызванному методу переменную $parameters в которой 
+				содержится массив с параметрами.
+				При помощи такого подхода, параметры будут переданы в метод 
+				в виде переменных и доступ к ним можно будет получить более 
+				удобным способом.
+
+				1-й способ передачи параметров выглядел так:
+				$result = $controllerObject->$actionName($parameters);				
+				*/
 				
 				if ($result != null) {
 					break;

@@ -12,12 +12,11 @@ class NewsController
 		Метод принимает один аргумент, в него из router.php будет
 		передана переменная $parameters, содержащая в себе массив
 	*/
-	public function actionView($params)  
+	public function actionView($category, $id, $ftf = NULL)  
 	{
-		echo '<br>' . $params[0];
-		echo '<br>' . $params[1];
-		echo '<br>' . $params[2];
-		// Один из способов получения переданных параметров
+		echo '<br>' . $category;
+		echo '<br>' . $id;
+		echo '<br>' . $ftf;
 		
 		return true;
 	}
