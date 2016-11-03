@@ -22,43 +22,19 @@ class Router
 	{
 		$uri = $this->getURI();
 		
-		foreach ($this->routes as $uriPattern => $path) // '/news/([a-z]+)/([0-9]+)' => 'news/view/$1/$2'
+		foreach ($this->routes as $uriPattern => $path)
 		{	
-			if (preg_match("~$uriPattern~", $uri)) // для совпадения с шаблоном достаточно любого набора букв/цифр
+			if (preg_match("~$uriPattern~", $uri))
 			{ 
 				$internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-				/* 
-				При помощи функции preg_replace() мы по определенному шаблону
-				(означающему поиск любых букв и цифр) описанному в переменной 
-				"~$uriPattern~" ищем совпадения в строке запроса $uri и подставляем
-				эти значения на места подмасок в переменной $path
-				*/
-				
-				echo 'Переменная $internalRoute до explode(): <br>';
-				echo '<pre>';
-				print_r($internalRoute);
-				echo '</pre> <br>';
 				
 				$segments = explode('/', $internalRoute);
 				
-				echo 'Переменная $segments до array_shift(): <br>';
-				echo '<pre>';
-				print_r($segments);
-				echo '</pre> <br>';
-				
-				//$bagName = array_shift($segments); 
 				$controllerName = ucfirst(array_shift($segments)).'Controller'; 
 				$actionName = 'action'.ucfirst((array_shift($segments)));
 				
-				echo '<br> Имя контроллера: ' . $controllerName;				
-				echo '<br> Имя метода: ' . $actionName;
-				
-				$parameters = $segments;
-				echo '<pre>';
-					print_r ($parameters);
-				echo '</pre>';
-				
-				/*
+				$parameters = $segments; // Array ([0] => sport, [1] => 123)
+							
 				$controllerFail = ROOT . '/controllers/' . $controllerName . '.php';
 				if (file_exists($controllerFail))
 				{
@@ -66,14 +42,12 @@ class Router
 				}
 				
 				$controllerObject = new $controllerName();
-				$result = $controllerObject->$actionName();
+				$result = $controllerObject->$actionName($parameters);
+				// Передаем параметры в инициализированный метод
 				
 				if ($result != null) {
 					break;
-				}
-				*/
-				
-				
+				}				
 			}			
 		}		
 	}	
