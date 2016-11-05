@@ -1,10 +1,19 @@
 <?php
 
+include_once ROOT. '/models/News.php';
+
 class NewsController 
 {
 	public function actionIndex() 
 	{
-		echo "Список новостей";
+	
+		$newsList = News::getNewsList(); //статический метод из модели новостей
+	
+		echo '<pre>';
+		print_r($newsList);
+		echo '</pre>';
+		
+		
 		return true;
 	}
 	

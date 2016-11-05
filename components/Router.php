@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 
 class Router 
@@ -44,7 +44,7 @@ class Router
 				$controllerObject = new $controllerName();
 				$result = call_user_func_array(array($controllerObject, $actionName), $parameters);
 				/*				
-				Эта функция вызывает метод чье название содержиться в переменной 
+				Эта функция вызывает метод чье название содержиться в переменной  
 				$actionName у объекта чье название содержиться в $controllerObject
 				и передает вызванному методу переменную $parameters в которой 
 				содержится массив с параметрами.
