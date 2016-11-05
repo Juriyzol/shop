@@ -12,20 +12,17 @@ class NewsController
 		echo '<pre>';
 		print_r($newsList);
 		echo '</pre>';
-		
-		
+				
 		return true;
 	}
 	
-	/*
-		Метод принимает один аргумент, в него из router.php будет
-		передана переменная $parameters, содержащая в себе массив
-	*/
-	public function actionView($category, $id, $ftf = NULL)  
+	public function actionView($id)  
 	{
-		echo '<br>' . $category;
-		echo '<br>' . $id;
-		echo '<br>' . $ftf;
+		$newsItem = News::getNewsItemByID($id); 
+		
+		echo '<pre>';
+		print_r($newsItem);
+		echo '</pre>';		
 		
 		return true;
 	}
