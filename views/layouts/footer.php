@@ -1,6 +1,3 @@
-
-        <br/>
-        <br/>
         
         <footer id="footer"><!--Footer-->
             <div class="footer-bottom">
