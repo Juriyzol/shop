@@ -1,6 +1,5 @@
  <?php
 
-
 class Router 
 {
 	private $routes;
@@ -33,7 +32,7 @@ class Router
 				$controllerName = ucfirst(array_shift($segments)).'Controller'; 
 				$actionName = 'action'.ucfirst((array_shift($segments)));
 				
-				$parameters = $segments; // Array ([0] => sport, [1] => 123)
+				$parameters = $segments;
 							
 				$controllerFail = ROOT . '/controllers/' . $controllerName . '.php';
 				if (file_exists($controllerFail))
@@ -43,18 +42,6 @@ class Router
 				
 				$controllerObject = new $controllerName();
 				$result = call_user_func_array(array($controllerObject, $actionName), $parameters);
-				/*				
-				Эта функция вызывает метод чье название содержиться в переменной  
-				$actionName у объекта чье название содержиться в $controllerObject
-				и передает вызванному методу переменную $parameters в которой 
-				содержится массив с параметрами.
-				При помощи такого подхода, параметры будут переданы в метод 
-				в виде переменных и доступ к ним можно будет получить более 
-				удобным способом.
-
-				1-й способ передачи параметров выглядел так:
-				$result = $controllerObject->$actionName($parameters);				
-				*/
 				
 				if ($result != null) {
 					break;

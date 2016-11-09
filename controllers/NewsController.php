@@ -5,13 +5,10 @@ include_once ROOT. '/models/News.php';
 class NewsController 
 {
 	public function actionIndex() 
-	{
+	{	
+		$newsList = News::getNewsList();
 	
-		$newsList = News::getNewsList(); //статический метод из модели новостей
-	
-		echo '<pre>';
-		print_r($newsList);
-		echo '</pre>';
+		require_once(ROOT . '/views/news/index.php');
 				
 		return true;
 	}
@@ -20,9 +17,7 @@ class NewsController
 	{
 		$newsItem = News::getNewsItemByID($id); 
 		
-		echo '<pre>';
-		print_r($newsItem);
-		echo '</pre>';		
+		require_once(ROOT . '/views/news/news-item.php');		
 		
 		return true;
 	}
