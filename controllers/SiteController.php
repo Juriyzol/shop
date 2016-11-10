@@ -1,6 +1,7 @@
 <?php
 
 include_once ROOT. '/models/Category.php';
+include_once ROOT. '/models/Product.php';
 
 class SiteController 
 {
@@ -9,11 +10,12 @@ class SiteController
 		$categories = array();	
 		$categories = Category::getCategoriesList();
 		
-		/* было вставлено для проверки
+		$latestProduct = array();	
+		$latestProduct = Product::getLatestProduct();
+		
 		echo '<pre>';		
-		print_r($categories);
-		echo '</pre>';
-		*/		
+		print_r($latestProduct);
+		echo '</pre>';		
 	
 		require_once(ROOT . '/views/site/index.php');
 		
