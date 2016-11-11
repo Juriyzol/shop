@@ -41,12 +41,13 @@
 													<img src="../../template/images/home/product1.jpg" alt="" />
 													<h2><?php echo $productItem['price'];?></h2>
 														<a href="/products/<?php echo $productItem['id'];?>">	
-															<p>
-																<?php echo $productItem['name'];?>
-															</p>
+															<p><?php echo $productItem['name'];?></p>
 														</a>	
 													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>В корзину</a>
 												</div>
+												<?php if ($productItem['is_new']): ?>
+													<img src="../../template/images/home/new.png" class="new" alt="" />
+												<?php endif; ?>
 											</div>
 										</div>
 									</div>

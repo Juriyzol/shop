@@ -34,5 +34,33 @@ class Product
 		}
 
 		return $productsList;
-	}	
+	}
+
+    /**
+     * Returns an array of products
+     */
+    public static function getProductsListByCategory($categoryId = false)
+    {
+        if ($categoryId) {
+
+            $db = Db::getConnection();            
+            $products = array();
+            $result = $db->query("SELECT id, name, price, image, is_new FROM products "
+                    . "WHERE status = '1' AND category_id = '$categoryId' " // товары в наличии и с определенным ИД
+                    . "ORDER BY id DESC "                
+                    . "LIMIT " . self::SHOW_BY_DEFAULT);
+
+            $i = 0;
+            while ($row = $result->fetch()) {
+                $products[$i]['id'] = $row['id'];
+                $products[$i]['name'] = $row['name'];
+                $products[$i]['image'] = $row['image'];
+                $products[$i]['price'] = $row['price'];
+                $products[$i]['is_new'] = $row['is_new'];
+                $i++;
+            }
+
+            return $products;       
+        }
+    }	
 }
