@@ -63,4 +63,35 @@ class Product
             return $products;       
         }
     }	
+	
+	public static function getProductById($id)
+	{	
+		$id = intval($id);
+
+        if ($id) 
+		{
+            $db = Db::getConnection();            
+            $products = array();
+            $result = $db->query("SELECT * FROM products WHERE id = " . $id);
+
+			$result->setFetchMode(PDO::FETCH_ASSOC); // возвращать только ассоциативный массив
+			
+			$product = $result->fetch();
+
+			return $product;     
+        }	
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
